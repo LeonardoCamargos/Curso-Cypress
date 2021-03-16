@@ -1,8 +1,9 @@
 /// <reference types="cypress" />
 
-describe('Work with basic elements', () => {
 
-    //Representa o teste interno apenas
+describe('Aula Campo', () =>{
+
+//Representa o teste interno apenas
     // //Representa o before all ou seja antes de todos os testes é rodado 
     before(() => {
         cy.visit('https://www.wcaquino.me/cypress/componentes.html')
@@ -13,34 +14,8 @@ describe('Work with basic elements', () => {
         cy.reload()
     })
 
-    //Textos
-    it('Text', () =>{
-                //visit irá acessar uma página específica
 
-        cy.get('body').should('contain','Cuidado')
-        cy.get('span').should('contain','Cuidado')//Deixando mais profundo 
-        cy.get('.facilAchar').should('contain','Cuidado')//class deixando mais profundo
-        cy.get('.facilAchar').should('have.text','Cuidado onde clica, muitas armadilhas...')//class deixando mais profundo
-    })
-
-
-    
-    it('links e botões' , () => {
-        // cy.get('a').click()
-        cy.get('[href="#"]').click()
-        cy.get('#resultado').should('have.text' , 'Voltou!')
-
-        cy.reload() // Refresh na tela 
-        cy.get('#resultado').should('have.not.text' , 'Voltou!') //Verifique que NÃO TEM o texto voltou
-        cy.contains('Voltar').click()//busca por texto
-        cy.get('#resultado').should('have.text' , 'Voltou!')
-    })
-
-
-    //AUla 13 Campos de texto
-
-
-    it.only('Text Fields',()=>{
+    it('Text Fields',()=>{
 
         cy.get('#formNome').type('Test Cypress')
         cy.get('#formNome').should('have.value','Test Cypress')//Assertiva no atributo value
@@ -63,7 +38,6 @@ describe('Work with basic elements', () => {
         .type('Erro{selectall}acerto',{delay:100}) //delay para ficar mais facil acompanhar
         .should('have.value','acerto')
     })
-
 
 
 })
