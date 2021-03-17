@@ -40,7 +40,7 @@ describe('Work with basic elements', () => {
     //AUla 13 Campos de texto
 
 
-    it.only('Text Fields',()=>{
+    it('Text Fields',()=>{
 
         cy.get('#formNome').type('Test Cypress')
         cy.get('#formNome').should('have.value','Test Cypress')//Assertiva no atributo value
@@ -63,6 +63,48 @@ describe('Work with basic elements', () => {
         .type('Erro{selectall}acerto',{delay:100}) //delay para ficar mais facil acompanhar
         .should('have.value','acerto')
     })
+
+
+
+    //RADIO AULA 14
+
+    it('RadioButton', ()=>{
+        cy.get('#formSexoFem')
+        .click()
+        .should('be.checked')//assertiva feita para isso 
+
+
+        //Checando que o masculino não está marcado
+
+        cy.get('#formSexoMasc').should('not.be.checked') //assertiva feita para isso  Verificando que não está marcado obs:Reload atuando para refresh
+
+            //Pra buscar um elemento cujo valor seja x (nesse caso name) buscar por "[name='x']""
+        cy.get("[name='formSexo']")//estava confundo as aspas por isso aspas duplas
+        .should('have.length',2) //Verificando que á duas opções  
+
+      
+    })
+
+      //AULA 15 CHEKCBOX
+      //DETALHE DA PARA PEDIR PARA CLICAR EM TODOS OS CHECKBOX DE UMA VEZ BASTA USAR A ESTRATÉGIA DA ACIMA USAR O MESMO NAME
+      it('Aula checkbox', ()=> {
+
+        cy.get('#formComidaPizza')
+        .click() // PODE CLICAR EM APENAS 1 ELEMENTO
+        .should('be.checked')
+ 
+      })
+
+
+    //clicando em tudo
+     it('Aula checkbox clicando em todos', ()=> {
+
+    cy.get('[name="formComidaFavorita"]')
+    .click({multiple:true})//adicionando um objeto com multiple true conforme propria orientação do cypress
+    .should('be.checked')
+         
+     })
+        
 
 
 
