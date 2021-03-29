@@ -106,6 +106,35 @@ describe('Work with basic elements', () => {
      })
         
 
+     //Aula Combo
 
+    it.only('Combo' ,() => {
+    cy.get('[data-test=dataEscolaridade]')
+        // .select('2o grau completo')//selecionando via valor
+        .select('1graucomp')//selecionando via value do select do combo
+        .should('have.value','1graucomp') 
+
+        cy.get('[data-test=dataEscolaridade] option')
+        .should('have.length',8)
+        
+        cy.get('[data-test=dataEscolaridade] option').then($arr => {
+            const values = []
+            $arr.each(function() {
+                values.push(this.innerHTML)
+            })
+            expect(values).to.include.members(["Superior","Mestrado"])
+        })
+
+    })
+
+
+    //AulaComboMúltiplo
+
+    it('Combo Multiplo',() => {
+        cy.get('[data-testid=dataEsportes]')
+        .select(['natacao','Corrida']) // Combo multiplo é via array com VALUE
+
+        
+    })
 
 })
