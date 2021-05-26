@@ -23,3 +23,29 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('clickAlert',(locator,message)=>{
+    cy.get(locator).click()
+    cy.on('window:alert', msg => {//pega eventos que aparece na tela criou um método
+        console.log(msg)
+        expect(msg).to.be.equal(message)
+    })
+
+
+Cypress.Commands.add('getToken', (user,passwd) => {
+    cy.request({
+        //objeto com propriedades dentro leo@teste.com 12345
+        method:'POST',
+        url:'https://barrigarest.wcaquino.me/signin',
+        body:{
+            email: user,   
+            redirecionar: false,
+            senha: passwd
+        }
+    }).its('body.token').should('not.be.empty')
+    .then(token => {
+        return token
+    })
+})
+
+})

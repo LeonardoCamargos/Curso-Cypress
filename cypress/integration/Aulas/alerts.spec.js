@@ -15,14 +15,15 @@ describe('Aula Alerts ...', () => {
 
 
     //aula 31 ALERT
-    it('Teste ALERT', () => {
+    it.only('Teste ALERT', () => {
 
-        cy.get('#alert').click()
-        cy.on('window:alert', msg => {//pega eventos que aparece na tela criou um método
-            console.log(msg)
-            expect(msg).to.be.equal('Alert Simples')
-        })
+        // cy.get('#alert').click()
+        // cy.on('window:alert', msg => {//pega eventos que aparece na tela criou um método
+        //     console.log(msg)
+        //     expect(msg).to.be.equal('Alert Simples')
+        // })
 
+        cy.clickAlert('#alert','Alert Simples')
 
     })
 
@@ -69,7 +70,7 @@ describe('Aula Alerts ...', () => {
     })
 
     //AULA 34 -PROMPT
-    it.only('Teste PROMPT', () => {
+    it('Teste PROMPT', () => {
 
         //tentar mockar o método prompt do window nativo
         //retorna o objeto window da página (Coloacndo em uma promise para sobrescrever o comportamento)
