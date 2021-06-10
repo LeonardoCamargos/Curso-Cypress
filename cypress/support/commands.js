@@ -30,22 +30,34 @@ Cypress.Commands.add('clickAlert',(locator,message)=>{
         console.log(msg)
         expect(msg).to.be.equal(message)
     })
+})
 
-
-Cypress.Commands.add('getToken', (user,passwd) => {
+//Pega token da aplicação BarrigaReact
+Cypress.Commands.add('getToken', (user, passwd) => {
     cy.request({
-        //objeto com propriedades dentro leo@teste.com 12345
-        method:'POST',
-        url:'https://barrigarest.wcaquino.me/signin',
-        body:{
-            email: user,   
+        method: 'POST',
+        url: '/signin',
+        body: {
+            email: user,
             redirecionar: false,
             senha: passwd
         }
     }).its('body.token').should('not.be.empty')
-    .then(token => {
-        return token
-    })
+        .then(token => {
+            Cypress.env('token', token)
+            return token
+        })
 })
 
+
+Cypress.Commands.add('resetRest',()=>{
+    cy.getToken('leo@a.com', 'leo').then(token => {
+
+        cy.request({
+            method:'GET',
+            url:'https://barrigarest.wcaquino.me/reset',
+            headers: { Authorization: `JWT ${token}` },
+        })
+
+    })
 })
